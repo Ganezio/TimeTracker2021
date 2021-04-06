@@ -39,12 +39,12 @@ def get_active_window():
 
 
 def summarize():
-    with open(log, "wt") as report:
+    with open(log, "wt", encoding="utf-8") as report:
         totaltime = sum([item[1] for item in winlist])
         report.write("")
         for w in winlist:
             w_percentage = str(round(100*w[1]/totaltime))
-            report.write("   " + time_format(w[1]) + " (" +
+            report.write("" + time_format(w[1]) + " (" +
                          w_percentage + " %)" + (6-len(w_percentage))*" " + w[0] + "\n")
         report.write("\n" + "="*60+"\nstarted: " + started+"\t"+"updated: " + current_time() +
                      "\n"+"="*60)
@@ -52,6 +52,7 @@ def summarize():
 
 t = 0
 winlist = []
+print("Monitoring started at " + started)
 
 while True:
     time.sleep(interval)
